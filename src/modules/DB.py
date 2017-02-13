@@ -1,3 +1,2 @@
-class DB() {
-	
-}
+class DB:
+    pass

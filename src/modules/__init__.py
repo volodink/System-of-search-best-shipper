@@ -1,3 +1,4 @@
-from . import Data_genetator
+from . import DataGenerator
 from . import DB
-from . import QtGUI
+from . import MyQtGUI
+
