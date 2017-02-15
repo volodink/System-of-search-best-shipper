@@ -25,8 +25,8 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="7.7781746"
-     inkscape:cx="23.203948"
+     inkscape:zoom="11"
+     inkscape:cx="6.6813355"
      inkscape:cy="33.86473"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -47,6 +47,18 @@
        position="-12.727922,31.884088"
        orientation="0,1"
        id="guide3474" />
+    <sodipodi:guide
+       position="31.884088,49.636364"
+       orientation="0,1"
+       id="guide4141" />
+    <sodipodi:guide
+       position="31.884088,38.181818"
+       orientation="0,1"
+       id="guide4143" />
+    <sodipodi:guide
+       position="31.884088,43.818182"
+       orientation="0,1"
+       id="guide4145" />
   </sodipodi:namedview>
   <metadata
      id="metadata3369">
@@ -56,14 +68,15 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <g
      id="layer1"
      inkscape:label="Layer 1"
-     inkscape:groupmode="layer">
+     inkscape:groupmode="layer"
+     style="display:inline">
     <rect
        style="fill:#008ff3;fill-opacity:1;stroke-width:0;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none"
        id="rect4151"
@@ -92,7 +105,7 @@
          y="38.415592"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Umpush;-inkscape-font-specification:Umpush" /></text>
     <circle
-       style="fill:#ffffff;fill-opacity:1;stroke-width:0.2;stroke-miterlimit:4;stroke-dasharray:none;stroke:#ffffff;stroke-opacity:0.50196081"
+       style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0.2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.50196078"
        id="path4280"
        cx="31.884089"
        cy="32.115913"
@@ -104,4 +117,8 @@
        cy="32.115913"
        r="17.613386" />
   </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Layer 2" />
 </svg>
