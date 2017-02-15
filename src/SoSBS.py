@@ -20,5 +20,6 @@ if __name__ == "__main__":
 	windows.pushButton.clicked.connect(test)
 	windows.spinBox.setValue(10)
 	app.setWindowIcon(QtGui.QIcon("../img/icon.png"))
+	windows.setWindowIcon(QtGui.QIcon("../img/icon.png"))
 	windows.show()
 	sys.exit(app.exec_())
