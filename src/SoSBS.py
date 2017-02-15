@@ -1,7 +1,7 @@
 import random
 import sys
 from modules.DataGenerator import DataGenerator
-from PyQt5 import QtWidgets, uic, QtGui
+from PyQt5 import QtWidgets, uic, QtGui, QtCore
 
 def test():
 	sti = QtGui.QStandardItemModel(parent = windows)
@@ -21,5 +21,6 @@ if __name__ == "__main__":
 	windows.spinBox.setValue(10)
 	app.setWindowIcon(QtGui.QIcon("../img/icon.png"))
 	windows.setWindowIcon(QtGui.QIcon("../img/icon.png"))
+	windows.setWindowFlags(QtCore.Qt.Window)
 	windows.show()
 	sys.exit(app.exec_())
