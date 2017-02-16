@@ -5,15 +5,61 @@ class DataGenerator:
     def __init__(self, pathToDict):
         self.file = open(pathToDict)
         self.file = self.file.readlines()
+
+    # def __init__(self):
+    #     pass
     
-    def getRandomName(self, number):
-        name = ""
-        for i in range(number):
-            name = name + " " + self.file[random.randint(0, len(self.file))][:-1]
+    def __getRandomName(self, number):
+        name = self.file[random.randint(0, len(self.file) - 1) ][:-1]
+        for i in range(number - 1):
+            name = name + " " + self.file[random.randint(0, len(self.file) - 1)][:-1]
         
         return name
 
+    def __getListingName(self, numb):
+        relList = ["Арабика Сантос", "Арабика Медельин", "Арабика Тарразу", "Арабика Блу Маунтин", "Арабиен Мокко",
+                    "Арабика Майсор", "Арабика", "Арабика Килиманджаро", "Арабика Кона", "Арабика с острова Ява",
+                    "Арабика с острова Суматра", "Арабика Харар"]
+
+        return tuple(tuple((i, random.uniform(100, 2000)) for i in random.sample(relList, numb))) 
+
+
+    def getPartnerData(self, number):
+        data = {}
+        for i in range(number): 
+            contact = {}
+            listingName = {}
+            reliability = {}
+
+
+            contact["name"] = self.__getRandomName(random.randint(1,3))
+            contact["phoneNumber"] = "+7" + str(random.randint(900, 999)) + str(random.randint(1000000, 9999999))
+            contact["email"] = contact["name"].split(" ")[0] + "@gmail.com"
+            contact["site"] = "".join([i.capitalize() for i in contact["name"].split(" ")]) + random.choice((".ru", ".com", ".uk", ".us"))
+
+            reliability["numBrokeSupply"] = random.randint(0, 100)
+            reliability["numLawsuitsNow"] = random.randint(0, 5)
+            reliability["numLawsuitsPast"] = random.randint(0, 30)
+            reliability["companyAge"] = random.randint(1, 80)
+            reliability["financPosition"] = random.uniform(300000, 50000000)
+            reliability["numberOfClient"] = random.randint(0, 100)
+            
+            
+            data[i] = {"contact": contact,
+                       "quality": random.randint(1, 10), 
+                       "dateOfDelivery": random.randint(1, 90),
+                       "listingName":  self.__getListingName(random.randint(1, 12)),
+                       "reliability": reliability}
+        
+        return data
+
 if __name__ == "__main__":
-    name = DataGenerator("../sortDict.txt")
-    for i in range(100):
-        print(name.getRandomName(random.randint(1, 5)))
+    dataGen = DataGenerator("../sortDict.txt")
+    num = 99
+    data = dataGen.getPartnerData(num)
+    print(data)
+    
+    
+    # for i in range(100):
+    #     print(name.getRandomName(random.randint(1, 5)))
+    # print(DataGenerator().getRandomPhoneNumber())
