@@ -1,5 +1,6 @@
 import sqlite3
 import os 
+from DataGenerator import DataGenerator
 
 class DataBase:
     def __init__(self, path):
@@ -19,6 +20,7 @@ class DataBase:
             print("Error: ", err)
         else:
             print("База данных успешно созданна!!!1")
+            self.cur.commit()
 
     def __del__(self):
         self.db.close()
@@ -41,10 +43,10 @@ class DataBase:
                     email,
                     site,
                     phoneNumber,
-                    listingName,
-                    price,
-                    description):
-        pass
+                    listingName):
+        insert = """
+            INSERT INTO 
+        """
 
     def getData():
         pass
@@ -52,3 +54,17 @@ class DataBase:
 
 if __name__ == "__main__":
     db = DataBase("../../sql/DB.sql")
+    genData = DataGenerator.getPartnerData(10)
+    for i in len(genData.keys):
+        db.putDataInDB(genData[i]["reliability"]["numLawsuitsNow"],
+                        genData[i]["reliability"]["numLawsuitsPast"],
+                        genData[i]["reliability"]["companyAge"],
+                        genData[i]["reliability"]["financPosition"],
+                        genData[i]["reliability"]["numberOfClient"],
+                        genData[i]["quality"],
+                        genData[i]["dateOfDelivery"],
+                        genData[i]["contact"]["name"],
+                        genData[i]["contact"]["email"],
+                        genData[i]["contact"]["site"],
+                        genData[i]["contact"]["phoneNumber"],
+                        genData[i]["listingName"])
