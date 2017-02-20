@@ -1,0 +1,27 @@
+QPushButton{
+    border-radius: 5px;
+    padding: 10px 15px 10px 15px;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 600;
+    background-color: #0176d6;
+}
+
+QPushButton:hover {
+    background-color: #006ac0;
+}
+
+/*QDialog {
+    background-color: white;
+}
+
+QGroupBox {
+    background-color: black;
+    border-radius: 15px;
+
+}
+
+QGroupBox#groupBox_3 {
+    background-color: none;
+}*/
+
