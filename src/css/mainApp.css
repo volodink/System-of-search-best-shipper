@@ -5,12 +5,25 @@ QPushButton{
     text-transform: uppercase;
     font-weight: 600;
     background-color: #0176d6;
+    border: 2px solid #0176d6;
 }
 
 QPushButton:hover {
     background-color: #006ac0;
+    border-color: #006ac0;
 }
 
+QPushButton:disabled {
+    background-color: #ECE8E4;
+    /*border-color: #D7D4D1;*/
+    color: #D7D4D1;
+    border: 1px solid #D7D4D1;
+}
+
+QPushButton:pressed {
+    background-color: #004a86;
+    border-color: #004a86;
+}
 
 /*QDialog {
     background-color: white;

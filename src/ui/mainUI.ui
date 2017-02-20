@@ -54,8 +54,11 @@
             </item>
             <item>
              <widget class="QSpinBox" name="spinBox">
+              <property name="minimum">
+               <number>1</number>
+              </property>
               <property name="maximum">
-               <number>100</number>
+               <number>1000</number>
               </property>
              </widget>
             </item>
@@ -165,7 +168,7 @@
             <item>
              <widget class="QLabel" name="label_11">
               <property name="text">
-               <string>до</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;до&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
              </widget>
             </item>
@@ -450,8 +453,6 @@
     </widget>
    </item>
   </layout>
-  <zorder>groupBox_3</zorder>
-  <zorder>verticalSpacer</zorder>
  </widget>
  <resources/>
  <connections>
