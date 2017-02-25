@@ -109,7 +109,7 @@ class MainApp:
 
 			
 	def main(self):
-		self.dataObj = DataGenerator("sortDict.txt")
+		self.dataObj = DataGenerator("txt/sortDict.txt")
 		self.windows.pushButton.clicked.connect(self.genAndSetData)
 		self.windows.pushButton_2.clicked.connect(self.searchBestPartner)
 		

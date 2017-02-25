@@ -1,9 +1,13 @@
 import random
 import os
+import codecs
 
 class DataGenerator:   
     def __init__(self, pathToDict):
-        self.file = open(pathToDict)
+        if os.name == "nt":
+            self.file = codecs.open(pathToDict, "r", "utf_8_sig")
+        else:
+            self.file = open(pathToDict)
         self.file = self.file.readlines()
 
     # def __init__(self):
