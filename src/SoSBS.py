@@ -15,7 +15,6 @@ class MainApp:
 		self.main()
 		
 		
-
 	def genAndSetData(self):
 		sti = QtGui.QStandardItemModel(parent = self.windows)
 		self.dataDict = self.dataObj.getPartnerData(self.windows.spinBox.value())
@@ -71,7 +70,10 @@ class MainApp:
 										self.dataDict[key]["reliability"]["numLawsuitsPast"],
 										self.dataDict[key]["reliability"]["companyAge"],
 										self.dataDict[key]["reliability"]["financPosition"],
-										self.dataDict[key]["reliability"]["numberOfClient"]))
+										self.dataDict[key]["reliability"]["numberOfClient"],
+										self.windows.horizontalSlider.value(),
+										self.windows.horizontalSlider_4.value(),
+										self.dataDict[key]["quality"]))
 			row1 = QtGui.QStandardItem(self.dataDict[key]["contact"]["name"])
 			row2 = QtGui.QStandardItem(raiting)
 			row3 = QtGui.QStandardItem(str(self.midPrice[key]))
@@ -84,7 +86,8 @@ class MainApp:
 			row10 = QtGui.QStandardItem(str(self.dataDict[key]["contact"]["phoneNumber"]))
 			row11 = QtGui.QStandardItem(str(self.dataDict[key]["contact"]["email"]))
 			row12 = QtGui.QStandardItem(str(self.dataDict[key]["contact"]["site"]))
-			sti.appendRow([row1, row2, row3, row4, row5, row6, row7, row8, row9, row10, row11, row12])
+			row13 = QtGui.QStandardItem(str(self.dataDict[key]["quality"]))
+			sti.appendRow([row1, row2, row3, row4, row5, row6, row7, row8, row9, row10, row11, row12, row13])
 		
 		sti.setHorizontalHeaderLabels(["Название компании", 
 										"Рейтинг", 
@@ -97,7 +100,8 @@ class MainApp:
 										"Возраст компании (лет)" , 
 										"Номер телефона", 
 										"Email",
-										"Сайт"])
+										"Сайт",
+										"Качество"]) 
 		self.windows.tableView.setModel(sti)
 		self.windows.tableView.setSortingEnabled(True)
 		self.windows.tableView.sortByColumn(1, QtCore.Qt.DescendingOrder)
@@ -119,16 +123,16 @@ class MainApp:
 		self.windows.label_3.setText(str(self.windows.horizontalSlider.value()))
 		self.windows.label_6.setText(str(self.windows.horizontalSlider_4.value()))
 
-		self.windows.horizontalSlider.valueChanged.connect(lambda: self.changeValueInSlider(self.windows.horizontalSlider, 
-																							self.windows.horizontalSlider_4, 
-																							self.windows.label_3, 
-																							self.windows.label_6,
-																							True))
-		self.windows.horizontalSlider_4.valueChanged.connect(lambda: self.changeValueInSlider(self.windows.horizontalSlider_4, 
-																							  self.windows.horizontalSlider, 
-																							  self.windows.label_6, 
-																							  self.windows.label_3,
-																							  False))
+		# self.windows.horizontalSlider.valueChanged.connect(lambda: self.changeValueInSlider(self.windows.horizontalSlider, 
+		# 																					self.windows.horizontalSlider_4, 
+		# 																					self.windows.label_3, 
+		# 																					self.windows.label_6,
+		# 																					True))
+		# self.windows.horizontalSlider_4.valueChanged.connect(lambda: self.changeValueInSlider(self.windows.horizontalSlider_4, 
+		# 																					  self.windows.horizontalSlider, 
+		# 																					  self.windows.label_6, 
+		# 																					  self.windows.label_3,
+		# 																					  False))
 		self.windows.tableView.clicked.connect(self.getSelectRow)
 
 

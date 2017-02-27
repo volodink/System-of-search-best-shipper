@@ -1,4 +1,4 @@
-def getPartnerRating(numBrokeSupply, numLawsuitsNow, LawsuitsPast, CompanyAge, financPosition, numberOfClientp):
+def getPartnerRating(numBrokeSupply, numLawsuitsNow, LawsuitsPast, CompanyAge, financPosition, numberOfClientpz):
     weightedNumberOfClient = 0.13
     weightedFinancPosition = 0.2
     weightedCompanyAge = 0.12
