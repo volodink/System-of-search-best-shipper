@@ -1,4 +1,4 @@
-def getPartnerRating(numBrokeSupply, numLawsuitsNow, LawsuitsPast, CompanyAge, financPosition, numberOfClientpz):
+def getReliabilityRating(numBrokeSupply, numLawsuitsNow, LawsuitsPast, CompanyAge, financPosition, numberOfClient):
     weightedNumberOfClient = 0.13
     weightedFinancPosition = 0.2
     weightedCompanyAge = 0.12
@@ -6,9 +6,13 @@ def getPartnerRating(numBrokeSupply, numLawsuitsNow, LawsuitsPast, CompanyAge, f
     weightedNumLawsuitsNow = 0.15
     weightedNumBrokeSupply = 0.3
                 
-    return weightedNumBrokeSupply * numBrokeSupply - \
+    return (weightedNumBrokeSupply * numBrokeSupply - \
             weightedNumLawsuitsNow * numLawsuitsNow - \
             weightednumLawsuitsPast * LawsuitsPast + \
             weightedCompanyAge * CompanyAge + \
             weightedFinancPosition * financPosition + \
-            weightedNumberOfClient * numberOfClientp
+            weightedNumberOfClient * numberOfClient) 
+
+def getPartnerRating(reliabilityRating, qualityRating, maxReliabilityRating, maxQualityRating, weightedReliability, weightedQuality):
+    return  reliabilityRating * ((maxReliabilityRating/100) * weightedReliability) + \
+            qualityRating * ((maxQualityRating/100) * weightedQuality)
