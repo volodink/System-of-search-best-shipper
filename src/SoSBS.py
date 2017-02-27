@@ -3,6 +3,7 @@ import sys
 from modules.DataGenerator import DataGenerator
 from PyQt5 import QtWidgets, uic, QtGui, QtCore
 from modules import mathRating 
+from math import floor, ceil
 # from collections import OrderedDict
 
 class MainApp:
@@ -21,24 +22,36 @@ class MainApp:
 		# print(self.dataDict)
 		self.midPrice = []
 		diliveryStat = []
+		self.reliability = []
+		self.quality = []
 		for key in sorted(self.dataDict.keys()):
 			item = QtGui.QStandardItem(self.dataDict[key]["contact"]["name"]) 
 			self.midPrice.append(self.__getMidleValue(self.dataDict[key]["listingName"]))
 			diliveryStat.append(self.dataDict[key]["dateOfDelivery"])
+			self.quality.append(self.dataDict[key]["quality"])
+			self.reliability.append(mathRating.getReliabilityRating(self.dataDict[key]["reliability"]["numBrokeSupply"],
+										self.dataDict[key]["reliability"]["numLawsuitsNow"],
+										self.dataDict[key]["reliability"]["numLawsuitsPast"],
+										self.dataDict[key]["reliability"]["companyAge"],
+										self.dataDict[key]["reliability"]["financPosition"],
+										self.dataDict[key]["reliability"]["numberOfClient"]))
+										
 			sti.appendRow(item)
+		self.maxReliability = max([i/50 for i in self.reliability])
+		self.maxQuality = max([i/50 for i in self.quality])
 		sti.setHorizontalHeaderLabels(["Название компании"])
 		self.windows.tableView.setModel(sti)
 		self.windows.tableView.resizeColumnsToContents()
 		 
 		# self.midPrice = [self.getMidleValue(i) for i in self.dataDict[0]["listingName"]]
-		self.windows.doubleSpinBox_7.setMinimum(min(self.midPrice))
-		self.windows.doubleSpinBox_7.setMaximum(max(self.midPrice))
+		self.windows.doubleSpinBox_7.setMinimum(float(floor(min(self.midPrice))))
+		self.windows.doubleSpinBox_7.setMaximum(float(ceil(max(self.midPrice))))
 
-		self.windows.doubleSpinBox_8.setMinimum(min(self.midPrice))
-		self.windows.doubleSpinBox_8.setMaximum(max(self.midPrice))
+		self.windows.doubleSpinBox_8.setMinimum(float(floor(min(self.midPrice))))
+		self.windows.doubleSpinBox_8.setMaximum(float(ceil(max(self.midPrice))))
 
-		self.windows.doubleSpinBox_7.setValue(min(self.midPrice))
-		self.windows.doubleSpinBox_8.setValue(max(self.midPrice))
+		self.windows.doubleSpinBox_7.setValue(float(floor(min(self.midPrice))))
+		self.windows.doubleSpinBox_8.setValue(float(ceil(max(self.midPrice))))
 
 		self.windows.spinBox_2.setMinimum(min(diliveryStat))
 		self.windows.spinBox_2.setMaximum(max(diliveryStat))
@@ -65,15 +78,13 @@ class MainApp:
 				continue
 			if not ((self.windows.spinBox_2.value() <= self.dataDict[key]["dateOfDelivery"] <= self.windows.spinBox_3.value())):
 				continue
-			raiting = str(mathRating.getPartnerRating(self.dataDict[key]["reliability"]["numBrokeSupply"],
-										self.dataDict[key]["reliability"]["numLawsuitsNow"],
-										self.dataDict[key]["reliability"]["numLawsuitsPast"],
-										self.dataDict[key]["reliability"]["companyAge"],
-										self.dataDict[key]["reliability"]["financPosition"],
-										self.dataDict[key]["reliability"]["numberOfClient"],
+			raiting = str(mathRating.getPartnerRating(self.reliability[key],
+										self.quality[key],
+										self.maxReliability,
+										self.maxQuality,
 										self.windows.horizontalSlider.value(),
-										self.windows.horizontalSlider_4.value(),
-										self.dataDict[key]["quality"]))
+										self.windows.horizontalSlider_4.value()))
+
 			row1 = QtGui.QStandardItem(self.dataDict[key]["contact"]["name"])
 			row2 = QtGui.QStandardItem(raiting)
 			row3 = QtGui.QStandardItem(str(self.midPrice[key]))
@@ -87,7 +98,8 @@ class MainApp:
 			row11 = QtGui.QStandardItem(str(self.dataDict[key]["contact"]["email"]))
 			row12 = QtGui.QStandardItem(str(self.dataDict[key]["contact"]["site"]))
 			row13 = QtGui.QStandardItem(str(self.dataDict[key]["quality"]))
-			sti.appendRow([row1, row2, row3, row4, row5, row6, row7, row8, row9, row10, row11, row12, row13])
+			row14 = QtGui.QStandardItem(str(self.reliability[key]))
+			sti.appendRow([row1, row2, row3, row4, row5, row6, row7, row8, row9, row10, row11, row12, row13, row14])
 		
 		sti.setHorizontalHeaderLabels(["Название компании", 
 										"Рейтинг", 
@@ -101,7 +113,8 @@ class MainApp:
 										"Номер телефона", 
 										"Email",
 										"Сайт",
-										"Качество"]) 
+										"Качество",
+										"Надежность"]) 
 		self.windows.tableView.setModel(sti)
 		self.windows.tableView.setSortingEnabled(True)
 		self.windows.tableView.sortByColumn(1, QtCore.Qt.DescendingOrder)
